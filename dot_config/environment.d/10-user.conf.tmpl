@@ -1,0 +1,8 @@
+EDITOR=nvim
+VISUAL=nvim
+PAGER="bat --paging=always"
+MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+TZ=America/Montreal
+
+SSH_AUTH_SOCK="/run/user/{{ .chezmoi.uid }}/gnupg/S.gpg-agent.ssh"

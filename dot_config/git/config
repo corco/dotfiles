@@ -1,0 +1,31 @@
+[commit]
+        gpgSign = true
+
+[filter "lfs"]
+        clean = "git-lfs clean -- %f"
+        process = "git-lfs filter-process"
+        required = true
+        smudge = "git-lfs smudge -- %f"
+
+[gpg]
+        format = "openpgp"
+
+[init]
+        defaultBranch = "main"
+
+[pull]
+        rebase = true
+
+[push]
+        autoSetupRemote = true
+
+[tag]
+        gpgSign = true
+
+[user]
+        email = "jonathan.drolet@gmail.com"
+        name = "Jonathan Drolet"
+        signingKey = "F0B1EAC39785DCAC"
+
+[includeIf "gitdir:~/work/"]
+  path = "work.config"
