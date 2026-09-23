@@ -23,9 +23,10 @@
         gpgSign = true
 
 [user]
-        email = "jonathan.drolet@gmail.com"
-        name = "Jonathan Drolet"
-        signingKey = "F0B1EAC39785DCAC"
+  email = "jonathan.drolet@riedel.net"
+  name = "Jonathan Drolet"
+  signingKey = "C65B028D39812495"
 
-[includeIf "gitdir:~/work/"]
-  path = "work.config"
+[includeIf "gitdir:~/perso/"]
+  path = "perso.config"
+

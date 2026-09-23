@@ -23,3 +23,7 @@ if status is-interactive
     set -gx GPG_TTY (tty)
     gpgconf --launch gpg-agent
 end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/drolet/.local/bin" $PATH

@@ -282,6 +282,13 @@ cursor {
     xcursor-size 24
 }
 
+environment {
+  _JAVA_AWT_WM_NONREPARENTING "1"
+
+  // xwayland-satellite doesn't support fractional scaling and does weird scaling thing
+  XCURSOR_SIZE "16"
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -289,6 +296,8 @@ cursor {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "uwsm" "app" "--" "qs" "-c" "noctalia-shell"
+
+spawn-at-startup "uwsm" "app" "--" "oniri" "--tiling-layout"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -358,6 +367,11 @@ window-rule {
     // block-out-from "screencast"
 }
 
+window-rule {
+  match app-id=r#"Vivado$"# title="Customizing IP"
+  open-floating true
+}
+
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
@@ -422,6 +436,8 @@ binds {
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
     Mod+Tab repeat=false { toggle-overview; }
+
+    Mod+P repeat=false { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
 
     Mod+Q repeat=false { close-window; }
 
