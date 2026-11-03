@@ -1,0 +1,207 @@
+# Sway config: Manjaro i3 (2020) keybindings, plus Noctalia.
+# Reference: `man 5 sway`. Reload with $mod+Shift+c.
+#
+# Keys follow the old Manjaro i3 defaults:
+#   focus j k l ; (left down up right), splits on h / v, layouts on s / w / e,
+#   $mod+Shift+q kills, $mod+0 is the power menu, $mod+9 locks.
+
+set $mod Mod4
+set $left j
+set $down k
+set $up l
+set $right semicolon
+
+set $term ghostty
+set $noctalia qs -c noctalia-shell ipc call
+
+### Look ##############################################################
+
+font pango:sans-serif 10
+default_border pixel 2
+default_floating_border normal
+gaps inner 5
+smart_gaps on
+smart_borders on
+
+# class                 border  background text    indicator child_border
+client.focused          #7fc8ff #285577    #ffffff #7fc8ff   #7fc8ff
+client.focused_inactive #505050 #3a3a3a    #ffffff #505050   #505050
+client.unfocused        #505050 #222222    #888888 #505050   #505050
+client.urgent           #9b0000 #9b0000    #ffffff #9b0000   #9b0000
+
+seat seat0 xcursor_theme catppuccin-mocha-mauve-cursors 24
+
+### Monitors (positions are in scaled pixels; same layout as niri) ####
+
+output eDP-1 mode 1920x1200@60Hz scale 1 pos 0 0
+output "ASUSTek COMPUTER INC ASUS PA279 0x00038786" mode 3840x2160@60Hz scale 1.5 pos 1920 0
+output "Acer Technologies XV275K P5 251100E414HA1" mode 3840x2160@60Hz scale 1.5 pos 4480 0
+
+### Input ##############################################################
+
+input type:keyboard {
+    xkb_layout us,ca
+    xkb_variant ,multix
+    xkb_options grp:caps_toggle,grp_led:caps
+    xkb_numlock enabled
+}
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+focus_follows_mouse yes
+workspace_auto_back_and_forth yes
+floating_modifier $mod normal
+
+### X11 apps (Vivado) ##################################################
+# Sway's own XWayland blurs X11 apps at scale 1.5. xwayland-satellite (the
+# same thing niri uses) draws them unscaled instead. DISPLAY=:0 is set in
+# ~/.config/uwsm/env-sway so every app started in this session finds it.
+xwayland disable
+exec xwayland-satellite :0
+
+### Autostart ##########################################################
+
+exec uwsm app -- qs -c noctalia-shell
+
+### Apps ###############################################################
+
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $noctalia launcher toggle
+bindsym $mod+F2 exec firefox
+bindsym $mod+F3 exec thunar
+
+# Screenshots (Manjaro: Print = screen, $mod+Print = window, $mod+Shift+Print = area)
+bindsym Print exec ~/.local/bin/screenshot screen
+bindsym $mod+Print exec ~/.local/bin/screenshot window
+bindsym $mod+Shift+Print exec ~/.local/bin/screenshot area
+
+# Mirror the focused monitor (from the niri config)
+bindsym $mod+p exec wl-mirror $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
+
+### Media keys (work on the lock screen too) ###########################
+
+bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0
+bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-
+bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym --locked XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioStop exec playerctl stop
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86MonBrightnessUp exec brightnessctl --class=backlight set +10%
+bindsym --locked XF86MonBrightnessDown exec brightnessctl --class=backlight set 10%-
+
+### Windows ############################################################
+
+bindsym $mod+Shift+q kill
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+q split toggle
+
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+s sticky toggle
+bindsym $mod+a focus parent
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+bindsym $mod+u border none
+bindsym $mod+y border pixel 2
+bindsym $mod+n border normal
+
+### Workspaces #########################################################
+
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+# $mod+N go to, $mod+Ctrl+N send window, $mod+Shift+N send window and follow
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+Ctrl+1 move container to workspace number 1
+bindsym $mod+Ctrl+2 move container to workspace number 2
+bindsym $mod+Ctrl+3 move container to workspace number 3
+bindsym $mod+Ctrl+4 move container to workspace number 4
+bindsym $mod+Ctrl+5 move container to workspace number 5
+bindsym $mod+Ctrl+6 move container to workspace number 6
+bindsym $mod+Ctrl+7 move container to workspace number 7
+bindsym $mod+Ctrl+8 move container to workspace number 8
+bindsym $mod+Shift+1 move container to workspace number 1; workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2; workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3; workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4; workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5; workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6; workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
+
+# Move the whole workspace to another monitor (not in Manjaro; added for you)
+bindsym $mod+Ctrl+Shift+Left move workspace to output left
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+bindsym $mod+Ctrl+Shift+Up move workspace to output up
+bindsym $mod+Ctrl+Shift+Down move workspace to output down
+
+### Session ############################################################
+
+bindsym $mod+9 exec $noctalia lockScreen lock
+bindsym $mod+0 exec $noctalia sessionMenu toggle
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym $left resize shrink width 5 px or 5 ppt
+    bindsym $down resize grow height 5 px or 5 ppt
+    bindsym $up resize shrink height 5 px or 5 ppt
+    bindsym $right resize grow width 5 px or 5 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+### Window rules #######################################################
+
+for_window [app_id="firefox$" title="^Picture-in-Picture$"] floating enable
+for_window [app_id="^1password$"] floating enable
+for_window [app_id="Vivado$" title="Customizing IP"] floating enable
+
+### Hand the session over to uwsm (keep this last) #####################
+exec exec uwsm finalize SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME

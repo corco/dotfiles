@@ -1,0 +1,58 @@
+// COSMIC keyboard shortcuts: Manjaro i3 (2020) layout.
+// Entries here override COSMIC's defaults for the same key; every other
+// default stays. "Disable" removes a default without replacing it.
+// COSMIC Settings > Keyboard > Shortcuts writes to this same file.
+{
+    // Apps
+    (modifiers: [Super], key: "Return"): Spawn("ghostty"),
+    (modifiers: [Super], key: "d"): System(Launcher),
+    (modifiers: [Super], key: "F2"): System(WebBrowser),
+    (modifiers: [Super], key: "F3"): Spawn("thunar"),
+
+    // Windows
+    (modifiers: [Super, Shift], key: "q"): Close,
+    (modifiers: [Super], key: "j"): Focus(Left),
+    (modifiers: [Super], key: "k"): Focus(Down),
+    (modifiers: [Super], key: "l"): Focus(Up),
+    (modifiers: [Super], key: "semicolon"): Focus(Right),
+    (modifiers: [Super, Shift], key: "j"): Move(Left),
+    (modifiers: [Super, Shift], key: "k"): Move(Down),
+    (modifiers: [Super, Shift], key: "l"): Move(Up),
+    (modifiers: [Super, Shift], key: "semicolon"): Move(Right),
+    (modifiers: [Super, Shift], key: "h"): Disable,
+
+    // Splits and layouts. COSMIC "stacks" are tabs; there is no i3 stacked layout.
+    (modifiers: [Super], key: "h"): Orientation(Horizontal),
+    (modifiers: [Super], key: "v"): Orientation(Vertical),
+    (modifiers: [Super], key: "q"): ToggleOrientation,
+    (modifiers: [Super], key: "e"): ToggleOrientation,
+    (modifiers: [Super], key: "w"): ToggleStacking,
+    (modifiers: [Super], key: "s"): ToggleStacking,
+    (modifiers: [Super], key: "f"): Fullscreen,
+    (modifiers: [Super, Shift], key: "space"): ToggleWindowFloating,
+    (modifiers: [Super, Shift], key: "s"): ToggleSticky,
+    (modifiers: [Super], key: "a"): Focus(Out),
+
+    // Workspaces: Super+N go to, Super+Ctrl+N send window, Super+Shift+N send and follow
+    (modifiers: [Super, Ctrl], key: "1"): SendToWorkspace(1),
+    (modifiers: [Super, Ctrl], key: "2"): SendToWorkspace(2),
+    (modifiers: [Super, Ctrl], key: "3"): SendToWorkspace(3),
+    (modifiers: [Super, Ctrl], key: "4"): SendToWorkspace(4),
+    (modifiers: [Super, Ctrl], key: "5"): SendToWorkspace(5),
+    (modifiers: [Super, Ctrl], key: "6"): SendToWorkspace(6),
+    (modifiers: [Super, Ctrl], key: "7"): SendToWorkspace(7),
+    (modifiers: [Super, Ctrl], key: "8"): SendToWorkspace(8),
+    (modifiers: [Super], key: "b"): LastWorkspace,
+    (modifiers: [Super, Shift], key: "b"): MoveToLastWorkspace,
+
+    // Move the whole workspace to another monitor (not in Manjaro; added for you)
+    (modifiers: [Super, Shift, Ctrl], key: "Left"): MigrateWorkspaceToOutput(Left),
+    (modifiers: [Super, Shift, Ctrl], key: "Right"): MigrateWorkspaceToOutput(Right),
+    (modifiers: [Super, Shift, Ctrl], key: "Up"): MigrateWorkspaceToOutput(Up),
+    (modifiers: [Super, Shift, Ctrl], key: "Down"): MigrateWorkspaceToOutput(Down),
+
+    // Session
+    (modifiers: [Super], key: "9"): System(LockScreen),
+    (modifiers: [Super], key: "0"): System(PowerOff),
+    (modifiers: [Super, Shift], key: "e"): System(LogOut),
+}

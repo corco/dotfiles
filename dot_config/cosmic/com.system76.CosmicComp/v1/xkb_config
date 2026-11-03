@@ -1,0 +1,7 @@
+(
+    rules: "",
+    model: "",
+    layout: "us,ca",
+    variant: ",multix",
+    options: Some("grp:caps_toggle,grp_led:caps"),
+)
