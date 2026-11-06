@@ -81,7 +81,7 @@ Hardware debug connects to a remote `hw_server` (`connect_hw_server -url TCP:<ho
 
 ## Desktops: sway, Hyprland, COSMIC (i3-style keys)
 
-niri stays the default. Each desktop below installs next to it; pick one on the login screen. All three use the old Manjaro i3 keys, so your hands don't change when you switch.
+niri stays the default. Each desktop below installs next to it; pick one on the login screen. All three use the same i3-style keys.
 
 chezmoi always writes all of these configs, installed or not. Unused ones do nothing.
 
@@ -115,13 +115,11 @@ chezmoi always writes all of these configs, installed or not. Unused ones do not
 | `Mod+Ctrl+1..8` / `Mod+Shift+1..8` | send window / send window and follow | |
 | `Mod+b` / `Mod+Shift+b` | previous workspace / send window there | |
 | `Mod+Ctrl+Left/Right` | previous / next workspace | |
-| `Mod+Ctrl+Shift+arrows` | **move the whole workspace to another monitor** | new, not in Manjaro |
+| `Mod+Ctrl+Shift+arrows` | move the whole workspace to another monitor | |
 | `Mod+r` | resize mode (`j k l ;` or arrows, Esc to leave) | COSMIC: `Mod+r` grows, `Mod+Shift+r` shrinks |
 | `Print` / `Mod+Print` / `Mod+Shift+Print` | screenshot monitor / window / area | sway and Hyprland: Noctalia saves to `~/Pictures` (change it in Noctalia Settings > Screenshot). COSMIC: `Print` opens its screenshot tool |
 | `Mod+9` / `Mod+0` | lock / power menu | |
 | `Mod+Shift+e` / `Mod+Shift+c` | exit / reload config | COSMIC reloads by itself, so `Mod+Shift+c` isn't bound |
-
-Dropped from Manjaro: menus and apps that don't exist anymore (`morc_menu`, `bmenu`, compton, `Mod+m` bar toggle, gaps mode).
 
 ### Common to sway and Hyprland
 
@@ -155,7 +153,7 @@ END
 On the login screen, pick **Sway (uwsm-managed)**, not plain "Sway". The uwsm session loads `environment.d` (Xilinx `PATH`, licence server) and `~/.config/uwsm/env-sway`.
 
 - X11 apps go through xwayland-satellite on `:0` (sway's own XWayland is turned off). To check, run `echo $DISPLAY` in a terminal; it should print `:0`.
-- 1Password can't be hidden from screen sharing on sway (niri's `block-out-from`).
+- 1Password can't be hidden from screen sharing on sway.
 
 Uninstall:
 
@@ -204,7 +202,7 @@ If this also installs `cosmic-greeter` (COSMIC's login screen), don't enable it.
 
 - COSMIC has its own panel, so Noctalia isn't used.
 - Set monitor layout and scale in Settings > Displays. COSMIC stores them itself, not in this repo.
-- X11 apps (Vivado) are drawn at native resolution by default, like niri. If Vivado looks wrong, try Settings > Displays first.
+- X11 apps (Vivado) are drawn at native resolution by default. If Vivado looks wrong, try Settings > Displays first.
 - COSMIC doesn't go through uwsm. In a COSMIC terminal, check that `echo $PATH` has the Xilinx paths and that `echo $_JAVA_AWT_WM_NONREPARENTING` prints `1`.
 - Changing shortcuts in COSMIC Settings rewrites the shortcuts file. `chezmoi diff` will show it; use `chezmoi re-add` to keep the change.
 

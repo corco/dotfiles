@@ -1,4 +1,4 @@
-// COSMIC keyboard shortcuts: Manjaro i3 (2020) layout.
+// COSMIC keyboard shortcuts: i3-style layout.
 // Entries here override COSMIC's defaults for the same key; every other
 // default stays. "Disable" removes a default without replacing it.
 // COSMIC Settings > Keyboard > Shortcuts writes to this same file.
@@ -45,7 +45,7 @@
     (modifiers: [Super], key: "b"): LastWorkspace,
     (modifiers: [Super, Shift], key: "b"): MoveToLastWorkspace,
 
-    // Move the whole workspace to another monitor (not in Manjaro; added for you)
+    // Move the whole workspace to another monitor
     (modifiers: [Super, Shift, Ctrl], key: "Left"): MigrateWorkspaceToOutput(Left),
     (modifiers: [Super, Shift, Ctrl], key: "Right"): MigrateWorkspaceToOutput(Right),
     (modifiers: [Super, Shift, Ctrl], key: "Up"): MigrateWorkspaceToOutput(Up),

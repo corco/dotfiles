@@ -1,8 +1,8 @@
--- Hyprland config: Manjaro i3 (2020) keybindings, plus Noctalia.
+-- Hyprland config: i3-style keybindings, plus Noctalia.
 -- Hyprland 0.57+ only reads Lua (hyprland.conf is no longer supported).
 -- Reference: https://wiki.hypr.land/configuring/
 --
--- Keys follow the old Manjaro i3 defaults:
+-- Keys:
 --   focus j k l ; (left down up right), splits on h / v, tabs on w,
 --   SUPER+SHIFT+Q kills, SUPER+0 is the power menu, SUPER+9 locks.
 -- Differences from i3 (Hyprland has no i3 tree):
@@ -15,7 +15,7 @@ local mod      = "SUPER"
 local terminal = "ghostty"
 local noctalia = "noctalia msg "
 
--- Manjaro i3 movement keys
+-- Movement keys
 local keys = { left = "J", down = "K", up = "L", right = "semicolon" }
 
 local function bind(k, action, opts) hl.bind(mod .. " + " .. k, action, opts) end
@@ -24,7 +24,7 @@ local function run(cmd) return hl.dsp.exec_cmd(cmd) end
 ------------------
 ---- MONITORS ----
 ------------------
--- Positions are in scaled pixels; same layout as niri.
+-- Positions are in scaled pixels.
 
 hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = "1" })
 hl.monitor({ output = "desc:ASUSTek COMPUTER INC ASUS PA279 0x00038786", mode = "3840x2160@60", position = "1920x0", scale = "1.5" })
@@ -75,8 +75,7 @@ hl.config({
         movefocus_cycles_groupfirst  = true, -- focus left/right walks through tabs
     },
 
-    -- X11 apps (Vivado) are drawn unscaled instead of blurry at 1.5,
-    -- the same result as xwayland-satellite on niri.
+    -- X11 apps (Vivado) are drawn unscaled instead of blurry at 1.5.
     xwayland = { force_zero_scaling = true },
 
     input = {
@@ -102,7 +101,7 @@ bind("F2",           run("firefox"))
 bind("F3",           run("thunar"))
 bind("P",            run([[wl-mirror $(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')]]))
 
--- Screenshots by Noctalia (Manjaro: Print = screen, SUPER+Print = window, SUPER+SHIFT+Print = area)
+-- Screenshots by Noctalia: Print = monitor, SUPER+Print = window, SUPER+SHIFT+Print = area
 hl.bind("Print",     run(noctalia .. "screenshot-fullscreen"))
 bind("Print",        run(noctalia .. "screenshot-window"))
 bind("SHIFT + Print", run(noctalia .. "screenshot-region"))
@@ -149,7 +148,7 @@ bind("SHIFT + B",    hl.dsp.window.move({ workspace = "previous" }))
 bind("CTRL + right", hl.dsp.focus({ workspace = "m+1" }))
 bind("CTRL + left",  hl.dsp.focus({ workspace = "m-1" }))
 
--- Move the whole workspace to another monitor (not in Manjaro; added for you)
+-- Move the whole workspace to another monitor
 bind("CTRL + SHIFT + left",  hl.dsp.workspace.move({ monitor = "l" }))
 bind("CTRL + SHIFT + right", hl.dsp.workspace.move({ monitor = "r" }))
 bind("CTRL + SHIFT + up",    hl.dsp.workspace.move({ monitor = "u" }))

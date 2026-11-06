@@ -1,7 +1,7 @@
-# Sway config: Manjaro i3 (2020) keybindings, plus Noctalia.
+# Sway config: i3-style keybindings, plus Noctalia.
 # Reference: `man 5 sway`. Reload with $mod+Shift+c.
 #
-# Keys follow the old Manjaro i3 defaults:
+# Keys:
 #   focus j k l ; (left down up right), splits on h / v, layouts on s / w / e,
 #   $mod+Shift+q kills, $mod+0 is the power menu, $mod+9 locks.
 
@@ -31,7 +31,7 @@ client.urgent           #9b0000 #9b0000    #ffffff #9b0000   #9b0000
 
 seat seat0 xcursor_theme catppuccin-mocha-mauve-cursors 24
 
-### Monitors (positions are in scaled pixels; same layout as niri) ####
+### Monitors (positions are in scaled pixels) ########################
 
 output eDP-1 mode 1920x1200@60Hz scale 1 pos 0 0
 output "ASUSTek COMPUTER INC ASUS PA279 0x00038786" mode 3840x2160@60Hz scale 1.5 pos 1920 0
@@ -56,8 +56,8 @@ workspace_auto_back_and_forth yes
 floating_modifier $mod normal
 
 ### X11 apps (Vivado) ##################################################
-# Sway's own XWayland blurs X11 apps at scale 1.5. xwayland-satellite (the
-# same thing niri uses) draws them unscaled instead. DISPLAY=:0 is set in
+# Sway's own XWayland blurs X11 apps at scale 1.5. xwayland-satellite
+# draws them unscaled instead. DISPLAY=:0 is set in
 # ~/.config/uwsm/env-sway so every app started in this session finds it.
 xwayland disable
 exec xwayland-satellite :0
@@ -73,12 +73,12 @@ bindsym $mod+d exec $noctalia panel-toggle launcher
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec thunar
 
-# Screenshots by Noctalia (Manjaro: Print = screen, $mod+Print = window, $mod+Shift+Print = area)
+# Screenshots by Noctalia: Print = monitor, $mod+Print = window, $mod+Shift+Print = area
 bindsym Print exec $noctalia screenshot-fullscreen
 bindsym $mod+Print exec $noctalia screenshot-window
 bindsym $mod+Shift+Print exec $noctalia screenshot-region
 
-# Mirror the focused monitor (from the niri config)
+# Mirror the focused monitor
 bindsym $mod+p exec wl-mirror $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
 
 ### Media keys, through Noctalia so you get its on-screen display ######
@@ -170,7 +170,7 @@ bindsym $mod+Shift+6 move container to workspace number 6; workspace number 6
 bindsym $mod+Shift+7 move container to workspace number 7; workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8; workspace number 8
 
-# Move the whole workspace to another monitor (not in Manjaro; added for you)
+# Move the whole workspace to another monitor
 bindsym $mod+Ctrl+Shift+Left move workspace to output left
 bindsym $mod+Ctrl+Shift+Right move workspace to output right
 bindsym $mod+Ctrl+Shift+Up move workspace to output up
