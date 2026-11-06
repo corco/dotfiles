@@ -74,10 +74,12 @@ bindsym $mod+d exec $noctalia panel-toggle launcher
 bindsym $mod+F2 exec chromium
 bindsym $mod+F3 exec thunar
 
-# Screenshots by Noctalia: Print = monitor, $mod+Print = window, $mod+Shift+Print = area
-bindsym Print exec $noctalia screenshot-fullscreen
+# Screenshots by Noctalia
+# Print: select an area, copy to clipboard only (no file)
+# $mod+Print: window, $mod+Shift+Print: monitor (saved to ~/Pictures and copied)
+bindsym Print exec $noctalia screenshot-region --copy-to-clipboard --no-save-to-file
 bindsym $mod+Print exec $noctalia screenshot-window
-bindsym $mod+Shift+Print exec $noctalia screenshot-region
+bindsym $mod+Shift+Print exec $noctalia screenshot-fullscreen
 
 # Mirror the focused monitor
 bindsym $mod+p exec wl-mirror $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')

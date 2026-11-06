@@ -102,10 +102,12 @@ bind("F2",           run("chromium"))
 bind("F3",           run("thunar"))
 bind("P",            run([[wl-mirror $(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')]]))
 
--- Screenshots by Noctalia: Print = monitor, SUPER+Print = window, SUPER+SHIFT+Print = area
-hl.bind("Print",     run(noctalia .. "screenshot-fullscreen"))
+-- Screenshots by Noctalia
+-- Print: select an area, copy to clipboard only (no file)
+-- SUPER+Print: window, SUPER+SHIFT+Print: monitor (saved to ~/Pictures and copied)
+hl.bind("Print",     run(noctalia .. "screenshot-region --copy-to-clipboard --no-save-to-file"))
 bind("Print",        run(noctalia .. "screenshot-window"))
-bind("SHIFT + Print", run(noctalia .. "screenshot-region"))
+bind("SHIFT + Print", run(noctalia .. "screenshot-fullscreen"))
 
 -- Windows
 bind("Q",            hl.dsp.window.close())

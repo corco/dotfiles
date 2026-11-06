@@ -119,7 +119,8 @@ Chromium is the default browser on every desktop, niri included. `run_onchange_a
 | `Mod+Ctrl+Left/Right` | previous / next workspace | |
 | `Mod+Ctrl+Shift+arrows` | move the whole workspace to another monitor | |
 | `Mod+r` | resize mode (`j k l ;` or arrows, Esc to leave) | COSMIC: `Mod+r` grows, `Mod+Shift+r` shrinks |
-| `Print` / `Mod+Print` / `Mod+Shift+Print` | screenshot monitor / window / area | sway and Hyprland: Noctalia saves to `~/Pictures` (change it in Noctalia Settings > Screenshot). COSMIC: `Print` opens its screenshot tool |
+| `Print` | select an area, copy to clipboard (no file) | COSMIC: opens its screenshot tool, where you pick area and clipboard |
+| `Mod+Print` / `Mod+Shift+Print` | screenshot window / monitor, saved to `~/Pictures` and copied | not in COSMIC |
 | `Mod+Escape` | lock | |
 | `Mod+Shift+e` | power menu (log out, reboot, shut down…) | |
 | `Mod+Shift+c` | reload config | COSMIC reloads by itself, so it isn't bound there |
