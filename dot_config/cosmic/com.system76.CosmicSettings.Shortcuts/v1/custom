@@ -10,6 +10,7 @@
     (modifiers: [Super], key: "F3"): Spawn("thunar"),
 
     // Windows
+    (modifiers: [Super], key: "q"): Close,
     (modifiers: [Super, Shift], key: "q"): Close,
     (modifiers: [Super], key: "j"): Focus(Left),
     (modifiers: [Super], key: "k"): Focus(Down),
@@ -24,7 +25,6 @@
     // Splits and layouts. COSMIC "stacks" are tabs; there is no i3 stacked layout.
     (modifiers: [Super], key: "h"): Orientation(Horizontal),
     (modifiers: [Super], key: "v"): Orientation(Vertical),
-    (modifiers: [Super], key: "q"): ToggleOrientation,
     (modifiers: [Super], key: "e"): ToggleOrientation,
     (modifiers: [Super], key: "w"): ToggleStacking,
     (modifiers: [Super], key: "s"): ToggleStacking,

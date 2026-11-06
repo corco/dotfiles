@@ -104,9 +104,9 @@ Chromium is the default browser on every desktop, niri included. `run_onchange_a
 | `Mod+F2` / `Mod+F3` | Chromium / Thunar | |
 | `Mod+j k l ;` or arrows | focus left / down / up / right | |
 | `Mod+Shift+j k l ;` or arrows | move window | |
-| `Mod+Shift+q` | close window | |
+| `Mod+q` or `Mod+Shift+q` | close window | |
 | `Mod+h` / `Mod+v` | split horizontal / vertical | Hyprland: picks where the next window opens. COSMIC: sets the orientation |
-| `Mod+q` / `Mod+e` | toggle split direction | |
+| `Mod+e` | toggle split direction | |
 | `Mod+w` / `Mod+s` | tabbed / stacked | only sway has stacked; elsewhere both keys toggle tabs |
 | `Mod+f` | fullscreen | |
 | `Mod+Shift+space` / `Mod+space` | float / focus floating vs tiled | `Mod+space` is sway only |

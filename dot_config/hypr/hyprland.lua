@@ -4,7 +4,7 @@
 --
 -- Keys:
 --   focus j k l ; (left down up right), splits on h / v, tabs on w,
---   SUPER+SHIFT+Q kills, SUPER+Escape locks, SUPER+SHIFT+E is the power menu,
+--   SUPER+Q (or SUPER+SHIFT+Q) kills, SUPER+Escape locks, SUPER+SHIFT+E is the power menu,
 --   SUPER+0 is workspace 10.
 -- Differences from i3 (Hyprland has no i3 tree):
 --   * "split h/v" picks where the NEXT window opens (dwindle preselect).
@@ -108,6 +108,7 @@ bind("Print",        run(noctalia .. "screenshot-window"))
 bind("SHIFT + Print", run(noctalia .. "screenshot-region"))
 
 -- Windows
+bind("Q",            hl.dsp.window.close())
 bind("SHIFT + Q",    hl.dsp.window.close())
 
 for dir, key in pairs(keys) do
@@ -121,7 +122,6 @@ end
 
 bind("H",            hl.dsp.layout("preselect r")) -- split h: next window opens to the right
 bind("V",            hl.dsp.layout("preselect d")) -- split v: next window opens below
-bind("Q",            hl.dsp.layout("togglesplit"))
 bind("E",            hl.dsp.layout("togglesplit"))
 
 bind("F",            hl.dsp.window.fullscreen())

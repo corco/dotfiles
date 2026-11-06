@@ -3,7 +3,7 @@
 #
 # Keys:
 #   focus j k l ; (left down up right), splits on h / v, layouts on s / w / e,
-#   $mod+Shift+q kills, $mod+Escape locks, $mod+Shift+e is the power menu,
+#   $mod+q (or $mod+Shift+q) kills, $mod+Escape locks, $mod+Shift+e is the power menu,
 #   $mod+0 is workspace 10.
 
 set $mod Mod4
@@ -97,6 +97,7 @@ bindsym --locked XF86MonBrightnessDown exec $noctalia brightness-down
 
 ### Windows ############################################################
 
+bindsym $mod+q kill
 bindsym $mod+Shift+q kill
 
 bindsym $mod+$left focus left
@@ -119,7 +120,6 @@ bindsym $mod+Shift+Right move right
 
 bindsym $mod+h split h
 bindsym $mod+v split v
-bindsym $mod+q split toggle
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
