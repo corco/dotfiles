@@ -4,7 +4,8 @@
 --
 -- Keys:
 --   focus j k l ; (left down up right), splits on h / v, tabs on w,
---   SUPER+SHIFT+Q kills, SUPER+0 is the power menu, SUPER+9 locks.
+--   SUPER+SHIFT+Q kills, SUPER+Escape locks, SUPER+SHIFT+E is the power menu,
+--   SUPER+0 is workspace 10.
 -- Differences from i3 (Hyprland has no i3 tree):
 --   * "split h/v" picks where the NEXT window opens (dwindle preselect).
 --   * Tabs are Hyprland "groups"; there is no stacked layout, so SUPER+S
@@ -136,11 +137,12 @@ bind("minus",        hl.dsp.workspace.toggle_special("scratchpad"))
 bind("mouse:272",    hl.dsp.window.drag(),   { mouse = true })
 bind("mouse:273",    hl.dsp.window.resize(), { mouse = true })
 
--- Workspaces: SUPER+N go to, SUPER+CTRL+N send window, SUPER+SHIFT+N send window and follow
-for i = 1, 8 do
-    bind(tostring(i),              hl.dsp.focus({ workspace = i }))
-    bind("CTRL + " .. i,           hl.dsp.window.move({ workspace = i, follow = false }))
-    bind("SHIFT + " .. i,          hl.dsp.window.move({ workspace = i }))
+-- Workspaces: SUPER+N go to, SUPER+CTRL+N send window, SUPER+SHIFT+N send window and follow (0 = 10)
+for i = 1, 10 do
+    local key = tostring(i % 10)
+    bind(key,                      hl.dsp.focus({ workspace = i }))
+    bind("CTRL + " .. key,         hl.dsp.window.move({ workspace = i, follow = false }))
+    bind("SHIFT + " .. key,        hl.dsp.window.move({ workspace = i }))
 end
 
 bind("B",            hl.dsp.focus({ workspace = "previous" }))
@@ -155,8 +157,7 @@ bind("CTRL + SHIFT + up",    hl.dsp.workspace.move({ monitor = "u" }))
 bind("CTRL + SHIFT + down",  hl.dsp.workspace.move({ monitor = "d" }))
 
 -- Session
-bind("9",            run(noctalia .. "session lock"))
-bind("0",            run(noctalia .. "panel-toggle session"))
+bind("Escape",       run(noctalia .. "session lock"))
 bind("SHIFT + E",    run(noctalia .. "panel-toggle session"))
 bind("SHIFT + C",    hl.dsp.reload_config())
 

@@ -111,15 +111,16 @@ chezmoi always writes all of these configs, installed or not. Unused ones do not
 | `Mod+Shift+s` | sticky | |
 | `Mod+a` | focus parent | not in Hyprland |
 | `Mod+Shift+minus` / `Mod+minus` | to scratchpad / show scratchpad | not in COSMIC |
-| `Mod+1..8` | go to workspace | |
-| `Mod+Ctrl+1..8` / `Mod+Shift+1..8` | send window / send window and follow | |
+| `Mod+1..9`, `Mod+0` | go to workspace (0 is workspace 10) | |
+| `Mod+Ctrl+1..0` / `Mod+Shift+1..0` | send window / send window and follow | |
 | `Mod+b` / `Mod+Shift+b` | previous workspace / send window there | |
 | `Mod+Ctrl+Left/Right` | previous / next workspace | |
 | `Mod+Ctrl+Shift+arrows` | move the whole workspace to another monitor | |
 | `Mod+r` | resize mode (`j k l ;` or arrows, Esc to leave) | COSMIC: `Mod+r` grows, `Mod+Shift+r` shrinks |
 | `Print` / `Mod+Print` / `Mod+Shift+Print` | screenshot monitor / window / area | sway and Hyprland: Noctalia saves to `~/Pictures` (change it in Noctalia Settings > Screenshot). COSMIC: `Print` opens its screenshot tool |
-| `Mod+9` / `Mod+0` | lock / power menu | |
-| `Mod+Shift+e` / `Mod+Shift+c` | exit / reload config | COSMIC reloads by itself, so `Mod+Shift+c` isn't bound |
+| `Mod+Escape` | lock | |
+| `Mod+Shift+e` | power menu (log out, reboot, shut down…) | |
+| `Mod+Shift+c` | reload config | COSMIC reloads by itself, so it isn't bound there |
 
 ### Common to sway and Hyprland
 

@@ -42,6 +42,10 @@
     (modifiers: [Super, Ctrl], key: "6"): SendToWorkspace(6),
     (modifiers: [Super, Ctrl], key: "7"): SendToWorkspace(7),
     (modifiers: [Super, Ctrl], key: "8"): SendToWorkspace(8),
+    (modifiers: [Super, Ctrl], key: "9"): SendToWorkspace(9),
+    (modifiers: [Super, Ctrl], key: "0"): SendToWorkspace(10),
+    (modifiers: [Super], key: "0"): Workspace(10),
+    (modifiers: [Super, Shift], key: "0"): MoveToWorkspace(10),
     (modifiers: [Super], key: "b"): LastWorkspace,
     (modifiers: [Super, Shift], key: "b"): MoveToLastWorkspace,
 
@@ -51,8 +55,6 @@
     (modifiers: [Super, Shift, Ctrl], key: "Up"): MigrateWorkspaceToOutput(Up),
     (modifiers: [Super, Shift, Ctrl], key: "Down"): MigrateWorkspaceToOutput(Down),
 
-    // Session
-    (modifiers: [Super], key: "9"): System(LockScreen),
-    (modifiers: [Super], key: "0"): System(PowerOff),
-    (modifiers: [Super, Shift], key: "e"): System(LogOut),
+    // Session (Super+Escape locks by default)
+    (modifiers: [Super, Shift], key: "e"): System(PowerOff),
 }
