@@ -93,7 +93,6 @@ chezmoi always writes all of these configs, installed or not. Unused ones do not
 | `~/.config/cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom` | COSMIC keyboard shortcuts |
 | `~/.config/cosmic/com.system76.CosmicComp/v1/*` | COSMIC tiling on, workspaces per monitor, keyboard layouts |
 | `~/.config/environment.d/20-java.conf` | all (Java apps like Vivado need it) |
-| `~/.local/bin/screenshot` | sway and Hyprland |
 
 ### Keys (Mod = Super)
 
@@ -118,17 +117,24 @@ chezmoi always writes all of these configs, installed or not. Unused ones do not
 | `Mod+Ctrl+Left/Right` | previous / next workspace | |
 | `Mod+Ctrl+Shift+arrows` | **move the whole workspace to another monitor** | new, not in Manjaro |
 | `Mod+r` | resize mode (`j k l ;` or arrows, Esc to leave) | COSMIC: `Mod+r` grows, `Mod+Shift+r` shrinks |
-| `Print` / `Mod+Print` / `Mod+Shift+Print` | screenshot screen / window / area | COSMIC: `Print` opens its screenshot tool |
+| `Print` / `Mod+Print` / `Mod+Shift+Print` | screenshot monitor / window / area | sway and Hyprland: Noctalia saves to `~/Pictures` (change it in Noctalia Settings > Screenshot). COSMIC: `Print` opens its screenshot tool |
 | `Mod+9` / `Mod+0` | lock / power menu | |
 | `Mod+Shift+e` / `Mod+Shift+c` | exit / reload config | COSMIC reloads by itself, so `Mod+Shift+c` isn't bound |
 
 Dropped from Manjaro: menus and apps that don't exist anymore (`morc_menu`, `bmenu`, compton, `Mod+m` bar toggle, gaps mode).
 
-### Common tools (sway and Hyprland)
+### Common to sway and Hyprland
 
 ```sh
-sudo pacman -S --needed uwsm grim slurp jq wl-clipboard libnotify wl-mirror brightnessctl playerctl
+sudo pacman -S --needed noctalia uwsm wl-mirror jq
 ```
+
+This is Noctalia v5: a native program started with `noctalia` and controlled with `noctalia msg …`. It no longer uses Quickshell, so the old `qs -c noctalia-shell ipc call …` commands don't work with it. It handles volume, brightness, media keys and screenshots itself, with its on-screen display.
+
+- v5 doesn't import v4 settings. Its config is `~/.config/noctalia/*.toml`; v4's was JSON. Both versions can be installed side by side.
+- Once nothing uses v4 anymore, remove it with `sudo pacman -Rns noctalia-shell` plus `noctalia-qs` or `quickshell`, whichever you have.
+- Password prompts (polkit): Noctalia has its own agent, but it's off by default (`polkit_agent` in its shell settings). Turn it on if nothing else on the system shows these prompts.
+- Noctalia locks before suspend by default, including lid close, so no lid rule is needed.
 
 ### sway
 

@@ -13,7 +13,7 @@
 
 local mod      = "SUPER"
 local terminal = "ghostty"
-local noctalia = "qs -c noctalia-shell ipc call "
+local noctalia = "noctalia msg "
 
 -- Manjaro i3 movement keys
 local keys = { left = "J", down = "K", up = "L", right = "semicolon" }
@@ -36,7 +36,7 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" 
 -------------------
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("uwsm app -- qs -c noctalia-shell")
+    hl.exec_cmd("uwsm app -- noctalia")
 end)
 
 hl.env("XCURSOR_THEME", "catppuccin-mocha-mauve-cursors")
@@ -97,15 +97,15 @@ hl.config({
 
 -- Apps
 bind("Return",       run(terminal))
-bind("D",            run(noctalia .. "launcher toggle"))
+bind("D",            run(noctalia .. "panel-toggle launcher"))
 bind("F2",           run("firefox"))
 bind("F3",           run("thunar"))
 bind("P",            run([[wl-mirror $(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')]]))
 
--- Screenshots (Manjaro: Print = screen, SUPER+Print = window, SUPER+SHIFT+Print = area)
-hl.bind("Print",     run("~/.local/bin/screenshot screen"))
-bind("Print",        run("~/.local/bin/screenshot window"))
-bind("SHIFT + Print", run("~/.local/bin/screenshot area"))
+-- Screenshots by Noctalia (Manjaro: Print = screen, SUPER+Print = window, SUPER+SHIFT+Print = area)
+hl.bind("Print",     run(noctalia .. "screenshot-fullscreen"))
+bind("Print",        run(noctalia .. "screenshot-window"))
+bind("SHIFT + Print", run(noctalia .. "screenshot-region"))
 
 -- Windows
 bind("SHIFT + Q",    hl.dsp.window.close())
@@ -156,9 +156,9 @@ bind("CTRL + SHIFT + up",    hl.dsp.workspace.move({ monitor = "u" }))
 bind("CTRL + SHIFT + down",  hl.dsp.workspace.move({ monitor = "d" }))
 
 -- Session
-bind("9",            run(noctalia .. "lockScreen lock"))
-bind("0",            run(noctalia .. "sessionMenu toggle"))
-bind("SHIFT + E",    run(noctalia .. "sessionMenu toggle"))
+bind("9",            run(noctalia .. "session lock"))
+bind("0",            run(noctalia .. "panel-toggle session"))
+bind("SHIFT + E",    run(noctalia .. "panel-toggle session"))
 bind("SHIFT + C",    hl.dsp.reload_config())
 
 -- Resize mode, like i3: SUPER+R, then j k l ; or arrows, Return/Escape to leave
@@ -177,21 +177,21 @@ hl.define_submap("resize", function()
     hl.bind("Escape", hl.dsp.submap("reset"))
 end)
 
--- Media keys (work on the lock screen too)
+-- Media keys, through Noctalia so you get its on-screen display
 local media = {
-    XF86AudioRaiseVolume  = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0",
-    XF86AudioLowerVolume  = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-",
-    XF86AudioMute         = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    XF86AudioMicMute      = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    XF86AudioPlay         = "playerctl play-pause",
-    XF86AudioStop         = "playerctl stop",
-    XF86AudioPrev         = "playerctl previous",
-    XF86AudioNext         = "playerctl next",
-    XF86MonBrightnessUp   = "brightnessctl --class=backlight set +10%",
-    XF86MonBrightnessDown = "brightnessctl --class=backlight set 10%-",
+    XF86AudioRaiseVolume  = "volume-up",
+    XF86AudioLowerVolume  = "volume-down",
+    XF86AudioMute         = "volume-mute",
+    XF86AudioMicMute      = "mic-mute",
+    XF86AudioPlay         = "media toggle",
+    XF86AudioStop         = "media stop",
+    XF86AudioPrev         = "media previous",
+    XF86AudioNext         = "media next",
+    XF86MonBrightnessUp   = "brightness-up",
+    XF86MonBrightnessDown = "brightness-down",
 }
 for key, cmd in pairs(media) do
-    hl.bind(key, run(cmd), { locked = true, repeating = true })
+    hl.bind(key, run(noctalia .. cmd), { locked = true, repeating = not cmd:find("^media") })
 end
 
 ----------------------
@@ -201,3 +201,4 @@ end
 hl.window_rule({ name = "firefox-pip", match = { class = "firefox$", title = "^Picture-in-Picture$" }, float = true })
 hl.window_rule({ name = "1password",   match = { class = "^1password$" }, float = true, no_screen_share = true })
 hl.window_rule({ name = "vivado-ip",   match = { class = "Vivado$", title = "Customizing IP" }, float = true })
+hl.window_rule({ name = "noctalia-settings", match = { class = "^dev\\.noctalia\\.Noctalia$" }, float = true })
