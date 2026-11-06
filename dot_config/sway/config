@@ -71,7 +71,7 @@ exec uwsm app -- noctalia
 
 bindsym $mod+Return exec $term
 bindsym $mod+d exec $noctalia panel-toggle launcher
-bindsym $mod+F2 exec firefox
+bindsym $mod+F2 exec chromium
 bindsym $mod+F3 exec thunar
 
 # Screenshots by Noctalia: Print = monitor, $mod+Print = window, $mod+Shift+Print = area

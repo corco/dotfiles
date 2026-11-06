@@ -98,7 +98,7 @@ hl.config({
 -- Apps
 bind("Return",       run(terminal))
 bind("D",            run(noctalia .. "panel-toggle launcher"))
-bind("F2",           run("firefox"))
+bind("F2",           run("chromium"))
 bind("F3",           run("thunar"))
 bind("P",            run([[wl-mirror $(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')]]))
 

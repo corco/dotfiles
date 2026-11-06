@@ -85,6 +85,8 @@ niri stays the default. Each desktop below installs next to it; pick one on the 
 
 chezmoi always writes all of these configs, installed or not. Unused ones do nothing.
 
+Chromium is the default browser on every desktop, niri included. `run_onchange_after_set-default-browser.sh` sets it with `xdg-mime` on `chezmoi apply`, and only touches the browser entries in `~/.config/mimeapps.list`. It needs `chromium` and `xdg-utils` installed; otherwise it prints a warning and skips.
+
 | File | Used by |
 |---|---|
 | `~/.config/sway/config` | sway |
@@ -99,7 +101,7 @@ chezmoi always writes all of these configs, installed or not. Unused ones do not
 | Keys | Action | Differences |
 |---|---|---|
 | `Mod+Return` / `Mod+d` | terminal / launcher | |
-| `Mod+F2` / `Mod+F3` | Firefox / Thunar | |
+| `Mod+F2` / `Mod+F3` | Chromium / Thunar | |
 | `Mod+j k l ;` or arrows | focus left / down / up / right | |
 | `Mod+Shift+j k l ;` or arrows | move window | |
 | `Mod+Shift+q` | close window | |
