@@ -199,6 +199,7 @@ end
 ----------------------
 
 hl.window_rule({ name = "firefox-pip", match = { class = "firefox$", title = "^Picture-in-Picture$" }, float = true })
+hl.window_rule({ name = "chromium-pip", match = { class = "^chromium", title = "^Picture in picture$" }, float = true })
 hl.window_rule({ name = "1password",   match = { class = "^1password$" }, float = true, no_screen_share = true })
 hl.window_rule({ name = "vivado-ip",   match = { class = "Vivado$", title = "Customizing IP" }, float = true })
 hl.window_rule({ name = "noctalia-settings", match = { class = "^dev\\.noctalia\\.Noctalia$" }, float = true })

@@ -206,6 +206,7 @@ mode "resize" {
 ### Window rules #######################################################
 
 for_window [app_id="firefox$" title="^Picture-in-Picture$"] floating enable
+for_window [app_id="^chromium" title="^Picture in picture$"] floating enable
 for_window [app_id="^1password$"] floating enable
 for_window [app_id="Vivado$" title="Customizing IP"] floating enable
 for_window [app_id="^dev\.noctalia\.Noctalia$"] floating enable
