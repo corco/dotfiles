@@ -24,6 +24,6 @@ if status is-interactive
     gpgconf --launch gpg-agent
 end
 
-
 # Added by Antigravity CLI installer
 set -gx PATH "/home/drolet/.local/bin" $PATH
+set -gx PATH /home/drolet/go/bin $PATH

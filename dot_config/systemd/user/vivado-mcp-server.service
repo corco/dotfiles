@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/vivado-mcp-server --vivado-path=%h/xilinx/2026.1/Vivado/bin/vivado --max-sessions=1 --enable-lsf=false --enable-ssh=false
+ExecStart=%h/.local/bin/vivado-mcp-server --vivado-path=%h/xilinx/2026.1.1/Vivado/bin/vivado --max-sessions=1 --enable-lsf=false --enable-ssh=false
 Restart=on-failure
 RestartSec=5
 
