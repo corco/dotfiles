@@ -58,8 +58,8 @@ floating_modifier $mod normal
 
 ### X11 apps (Vivado) ##################################################
 # Sway's own XWayland blurs X11 apps at scale 1.5. xwayland-satellite
-# draws them unscaled instead. DISPLAY=:0 is set in
-# ~/.config/uwsm/env-sway so every app started in this session finds it.
+# draws them unscaled instead. DISPLAY=:0 is set by ~/.local/bin/sway-satellite,
+# which the login-screen entry starts instead of plain sway.
 xwayland disable
 exec xwayland-satellite :0
 

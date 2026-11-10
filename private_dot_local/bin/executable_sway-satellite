@@ -1,0 +1,8 @@
+#!/bin/sh
+# Starts sway with X11 apps going through xwayland-satellite on :0
+# (the sway config starts xwayland-satellite :0).
+# uwsm clears DISPLAY before it starts the compositor, so it is set here.
+# Everything sway launches inherits it, and `uwsm finalize` passes it on
+# to systemd and D-Bus activated apps.
+export DISPLAY=:0
+exec sway "$@"

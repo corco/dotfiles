@@ -1,3 +1,0 @@
-# Read by uwsm before sway starts (sway session only).
-# xwayland-satellite is started on :0 from the sway config.
-export DISPLAY=:0

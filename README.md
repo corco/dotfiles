@@ -90,7 +90,7 @@ Chromium is the default browser on every desktop, niri included. `run_onchange_a
 | File | Used by |
 |---|---|
 | `~/.config/sway/config` | sway |
-| `~/.config/uwsm/env-sway` | sway (sets `DISPLAY` for xwayland-satellite) |
+| `~/.local/bin/sway-satellite` | sway (starts sway with `DISPLAY=:0` for xwayland-satellite) |
 | `~/.config/hypr/hyprland.lua` | Hyprland 0.57+ (Lua only; `hyprland.conf` is no longer read) |
 | `~/.config/cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom` | COSMIC keyboard shortcuts |
 | `~/.config/cosmic/com.system76.CosmicComp/v1/*` | COSMIC tiling on, workspaces per monitor, keyboard layouts |
@@ -144,17 +144,17 @@ Install:
 
 ```sh
 sudo pacman -S --needed sway xwayland-satellite xdg-desktop-portal-wlr xdg-desktop-portal-gtk
-sudo tee /usr/share/wayland-sessions/sway-uwsm.desktop >/dev/null <<'END'
+sudo tee /usr/share/wayland-sessions/sway-uwsm.desktop >/dev/null <<END
 [Desktop Entry]
 Name=Sway (uwsm-managed)
-Exec=uwsm start -e -D sway sway.desktop
+Exec=uwsm start -e -D sway -N Sway -- $HOME/.local/bin/sway-satellite
 TryExec=uwsm
 DesktopNames=sway
 Type=Application
 END
 ```
 
-On the login screen, pick **Sway (uwsm-managed)**, not plain "Sway". The uwsm session loads `environment.d` (Xilinx `PATH`, licence server) and `~/.config/uwsm/env-sway`.
+On the login screen, pick **Sway (uwsm-managed)**, not plain "Sway". The uwsm session loads `environment.d` (Xilinx `PATH`, licence server). It starts sway through `~/.local/bin/sway-satellite`, which sets `DISPLAY=:0`: uwsm clears `DISPLAY` before starting a compositor, so it can't come from an env file. The `tee` command writes your real home path into the entry, so run it as your user, not from a root shell.
 
 - X11 apps go through xwayland-satellite on `:0` (sway's own XWayland is turned off). To check, run `echo $DISPLAY` in a terminal; it should print `:0`.
 - 1Password can't be hidden from screen sharing on sway.
@@ -164,10 +164,10 @@ Uninstall:
 ```sh
 sudo rm /usr/share/wayland-sessions/sway-uwsm.desktop
 sudo pacman -Rns sway xdg-desktop-portal-wlr   # keep xwayland-satellite and uwsm, niri uses them
-rm -r ~/.config/sway ~/.config/uwsm/env-sway
+rm -r ~/.config/sway ~/.local/bin/sway-satellite
 ```
 
-To stop chezmoi from putting the config back, delete `dot_config/sway` and `dot_config/uwsm/env-sway` from this repo.
+To stop chezmoi from putting the config back, delete `dot_config/sway` and `private_dot_local/bin/executable_sway-satellite` from this repo.
 
 ### Hyprland
 
