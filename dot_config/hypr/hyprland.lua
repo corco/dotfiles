@@ -77,6 +77,7 @@ hl.config({
         workspace_back_and_forth     = 1,    -- like i3's workspace_auto_back_and_forth
         allow_workspace_cycles       = true,
         movefocus_cycles_groupfirst  = true, -- focus left/right walks through tabs
+        window_direction_monitor_fallback = false, -- focus stops at the monitor edge
     },
 
     -- X11 apps (Vivado) are drawn unscaled instead of blurry at 1.5.
@@ -115,13 +116,27 @@ bind("SHIFT + Print", run(noctalia .. "screenshot-fullscreen"))
 -- Windows
 bind("Q",            hl.dsp.window.close())
 
+-- Moving a window: with the monitor fallback off, a move at the monitor
+-- edge does nothing, so in that case send the window to the next monitor.
+local function move_window(dir)
+    return function()
+        local w = hl.get_active_window()
+        if not w then return end
+        local before = { x = w.at.x, y = w.at.y, group = w.group }
+        hl.dispatch(hl.dsp.window.move({ direction = dir, group_aware = true }))
+        if w.at.x == before.x and w.at.y == before.y and w.group == before.group then
+            hl.dispatch(hl.dsp.window.move({ monitor = dir:sub(1, 1) }))
+        end
+    end
+end
+
 for dir, key in pairs(keys) do
     bind(key,                  hl.dsp.focus({ direction = dir }))
-    bind("SHIFT + " .. key,    hl.dsp.window.move({ direction = dir, group_aware = true }))
+    bind("SHIFT + " .. key,    move_window(dir))
 end
 for _, dir in ipairs({ "left", "down", "up", "right" }) do
     bind(dir,                  hl.dsp.focus({ direction = dir }))
-    bind("SHIFT + " .. dir,    hl.dsp.window.move({ direction = dir, group_aware = true }))
+    bind("SHIFT + " .. dir,    move_window(dir))
 end
 
 bind("H",            hl.dsp.layout("preselect r")) -- split h: next window opens to the right

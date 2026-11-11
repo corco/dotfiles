@@ -102,8 +102,8 @@ Chromium is the default browser on every desktop, niri included. `run_onchange_a
 |---|---|---|
 | `Mod+Return` / `Mod+d` | terminal / launcher | |
 | `Mod+F2` / `Mod+F3` | Chromium / Thunar | |
-| `Mod+j k l ;` or arrows | focus left / down / up / right | |
-| `Mod+Shift+j k l ;` or arrows | move window | |
+| `Mod+j k l ;` or arrows | focus left / down / up / right | stays on the monitor: sway wraps around the workspace, Hyprland stops at the edge. COSMIC can't be changed: it goes on to the next workspace or monitor |
+| `Mod+Shift+j k l ;` or arrows | move window | can still push a window onto the next monitor |
 | `Mod+q` | close window | |
 | `Mod+h` / `Mod+v` | split horizontal / vertical | Hyprland: picks where the next window opens. COSMIC: sets the orientation |
 | `Mod+e` | toggle split direction | |
