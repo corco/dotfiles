@@ -10,6 +10,9 @@
 --   * "split h/v" picks where the NEXT window opens (dwindle preselect).
 --   * Tabs are Hyprland "groups"; there is no stacked layout, so SUPER+S
 --     also toggles tabs. Focus left/right walks through the tabs first.
+--     Moving a window toward a group puts it in the group; moving it out
+--     of the group's edge takes it out. SUPER+SHIFT+W groups every tiled
+--     window on the workspace (SUPER+W on any of them ungroups).
 --   * The scratchpad is the special workspace "scratchpad".
 
 local mod      = "SUPER"
@@ -114,11 +117,11 @@ bind("Q",            hl.dsp.window.close())
 
 for dir, key in pairs(keys) do
     bind(key,                  hl.dsp.focus({ direction = dir }))
-    bind("SHIFT + " .. key,    hl.dsp.window.move({ direction = dir }))
+    bind("SHIFT + " .. key,    hl.dsp.window.move({ direction = dir, group_aware = true }))
 end
 for _, dir in ipairs({ "left", "down", "up", "right" }) do
     bind(dir,                  hl.dsp.focus({ direction = dir }))
-    bind("SHIFT + " .. dir,    hl.dsp.window.move({ direction = dir }))
+    bind("SHIFT + " .. dir,    hl.dsp.window.move({ direction = dir, group_aware = true }))
 end
 
 bind("H",            hl.dsp.layout("preselect r")) -- split h: next window opens to the right
@@ -128,6 +131,25 @@ bind("E",            hl.dsp.layout("togglesplit"))
 bind("F",            hl.dsp.window.fullscreen())
 bind("W",            hl.dsp.group.toggle())        -- tabbed
 bind("S",            hl.dsp.group.toggle())        -- no stacked layout in Hyprland
+
+-- Put every tiled window on this workspace into one group (tabs), like
+-- sway's tabbed layout on the whole workspace.
+local function group_workspace()
+    local active = hl.get_active_window()
+    if not active or active.floating then return end
+    if not active.group then
+        hl.dispatch(hl.dsp.group.toggle({ window = active }))
+    end
+    local group = active.group
+    if not group then return end
+    for _, w in ipairs(hl.get_workspace_windows(active.workspace)) do
+        if not w.floating and w.group ~= group then
+            if w.group then w.group:remove(w) end
+            group:add(w)
+        end
+    end
+end
+bind("SHIFT + W",    group_workspace)
 
 bind("SHIFT + space", hl.dsp.window.float({ action = "toggle" }))
 bind("SHIFT + S",    hl.dsp.window.pin())          -- sticky

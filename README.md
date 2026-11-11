@@ -108,6 +108,7 @@ Chromium is the default browser on every desktop, niri included. `run_onchange_a
 | `Mod+h` / `Mod+v` | split horizontal / vertical | Hyprland: picks where the next window opens. COSMIC: sets the orientation |
 | `Mod+e` | toggle split direction | |
 | `Mod+w` / `Mod+s` | tabbed / stacked | only sway has stacked; elsewhere both keys toggle tabs |
+| `Mod+Shift+w` | put every tiled window on the workspace in one tab group | Hyprland only (sway's `Mod+w` already does this) |
 | `Mod+f` | fullscreen | |
 | `Mod+Shift+space` / `Mod+space` | float / focus floating vs tiled | `Mod+space` is sway only |
 | `Mod+Shift+s` | sticky | |
@@ -181,7 +182,7 @@ hyprctl version   # must be 0.57 or later: the config is Lua
 On the login screen, pick **Hyprland (uwsm-managed)** (the package installs it).
 
 - X11 apps use Hyprland's own XWayland with `force_zero_scaling`, which is how Vivado was fine there before.
-- Tabs are Hyprland groups. `Mod+j` / `Mod+;` move through the tabs before moving to the next window.
+- Tabs are Hyprland groups. `Mod+j` / `Mod+;` move through the tabs before moving to the next window. `Mod+Shift+j k l ;` moves a window into a group next to it, and out of its group past the group's edge.
 - No hy3 plugin: plugins break on every Hyprland update.
 - An old `~/.config/hypr/hyprland.conf` from before is ignored by 0.57. Delete it to avoid confusion.
 
