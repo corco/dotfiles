@@ -1,0 +1,4 @@
+// Windows that always open floating. COSMIC Settings > Windows writes to this file too.
+[
+    (appid: "(?i)^1password$", title: ".*", enabled: true),
+]

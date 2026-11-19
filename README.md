@@ -94,6 +94,7 @@ Chromium is the default browser on every desktop, niri included. `run_onchange_a
 | `~/.config/hypr/hyprland.lua` | Hyprland 0.57+ (Lua only; `hyprland.conf` is no longer read) |
 | `~/.config/cosmic/com.system76.CosmicSettings.Shortcuts/v1/custom` | COSMIC keyboard shortcuts |
 | `~/.config/cosmic/com.system76.CosmicComp/v1/*` | COSMIC tiling on, workspaces per monitor, keyboard layouts |
+| `~/.config/cosmic/com.system76.CosmicSettings.WindowRules/v1/tiling_exception_custom` | COSMIC windows that always float (1Password) |
 | `~/.config/environment.d/20-java.conf` | all (Java apps like Vivado need it) |
 
 ### Keys (Mod = Super)
